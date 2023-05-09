@@ -11,10 +11,11 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text BestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
-    private int m_Points;
+    public static int m_Points;
     
     private bool m_GameOver = false;
 
@@ -42,6 +43,9 @@ public class MainManager : MonoBehaviour
     {
         if (!m_Started)
         {
+            PersistenceManager.Instance.LoadBestScoreName(); // load best score
+            BestScoreText.text = "Best score: " + PersistenceManager.Instance.bestPlayerName + ": " + PersistenceManager.Instance.highestPoints;
+            m_Points = 0;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 m_Started = true;
@@ -55,6 +59,7 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            PersistenceManager.Instance.SaveBestScoreName(); // save best score
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
