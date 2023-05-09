@@ -52,13 +52,13 @@ public class PersistenceManager : MonoBehaviour
         public int highestPoints;
     }
 
-    public void SaveBestScoreName()//если счет выше, чем предыдущий, то сохранить данные
+    public void SaveBestScoreName()
     {
         if(m_Points > highestPoints)
         {
             SaveData data = new SaveData();
-            data.bestPlayerName = playerName; //имя лучшего игрока теперь имя текущего игрока
-            data.highestPoints = m_Points;//лучший счет теперь текущий счет
+            data.bestPlayerName = playerName;
+            data.highestPoints = m_Points;
 
             string json = JsonUtility.ToJson(data);
 
